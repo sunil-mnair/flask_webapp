@@ -13,8 +13,6 @@ countries_list = response.json()
 
 project_dir = os.path.dirname(os.path.abspath(__file__))
 
-if 'home' in project_dir:
-    project_dir += '/mysite'
 
 with open(project_dir+"/static/data/student.json") as f:
     student_list = json.load(f)

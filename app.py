@@ -1,5 +1,5 @@
 from flask import Flask,request,render_template,jsonify
-import requests,json
+import requests,json,os
 
 # Creating an Object of the Flask App
 app = Flask(__name__)
@@ -11,7 +11,12 @@ url = 'https://eif.pythonanywhere.com/countries'
 response = requests.get(url)
 countries_list = response.json()
 
-with open("static/data/student.json") as f:
+project_dir = os.path.dirname(os.path.abspath(__file__))
+
+if 'home' in project_dir:
+    project_dir += '/mysite'
+
+with open(project_dir+"/static/data/student.json") as f:
     student_list = json.load(f)
 
 

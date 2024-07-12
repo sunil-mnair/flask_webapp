@@ -1,5 +1,5 @@
-from flask import Flask,request,render_template
-import requests
+from flask import Flask,request,render_template,jsonify
+import requests,json
 
 # Creating an Object of the Flask App
 app = Flask(__name__)
@@ -10,6 +10,11 @@ url = 'https://eif.pythonanywhere.com/countries'
 # Send a GET request to the API
 response = requests.get(url)
 countries_list = response.json()
+
+with open("static/data/student.json") as f:
+    student_list = json.load(f)
+
+
 
 @app.route("/")
 def index():
@@ -27,3 +32,18 @@ def countries():
     for c in countries_list:
         if c["name"] == country:
             return render_template("countries.html",c = c)
+
+@app.route("/dictionary")
+def dictionary():
+    word = request.args.get("word")
+
+    url = f'https://api.dictionaryapi.dev/api/v2/entries/en/{word}'
+
+    response = requests.get(url)
+    dictionary_list = response.json()
+
+    return render_template("dictionary.html",dl = dictionary_list[0])
+
+@app.route("/students")
+def students():
+    return jsonify(student_list)

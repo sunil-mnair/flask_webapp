@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>{{dl['word']}}</h1>
+    <i>{{dl['origin']}}</i>
+    <h2>Examples</h2>
+    <ul>
+        <li>
+            Example 1: {{dl['meanings'][0]["partOfSpeech"]}}
+        </li>
+        <li>
+            Meaning: 
+            <ol>
+            {% for x in dl['meanings'][0]["definitions"] %}
+            <li>{{ x["definition"] }}</li>
+            {% endfor %}
+        </ol>
+        </li>
+
+    </ul>
+</body>
+</html>
